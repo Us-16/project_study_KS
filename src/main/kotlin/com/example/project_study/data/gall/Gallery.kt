@@ -1,6 +1,9 @@
 package com.example.project_study.data.gall
 
 import com.example.project_study.data.account.Account
+import com.fasterxml.jackson.annotation.JsonBackReference
+import com.fasterxml.jackson.annotation.JsonIgnore
+import groovy.transform.ToString
 import jakarta.persistence.*
 import java.time.LocalDateTime
 

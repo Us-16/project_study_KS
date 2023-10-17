@@ -15,7 +15,7 @@ class GalleryImageTest(
     @Test
     fun create(){
         val image = GalleryImage(
-            gallery = galleryRepository.findById(1L).orElseThrow(),
+            gallery = galleryRepository.findById(2L).orElseThrow(),
             path = "/test/test2.png",
             size = 40
         )
