@@ -3,11 +3,7 @@ package com.example.project_study
 import com.example.project_study.data.account.AccountRepository
 import com.example.project_study.data.gall.Gallery
 import com.example.project_study.data.gall.GalleryRepository
-import groovy.util.logging.Slf4j
-import org.apache.logging.log4j.util.MessageSupplier
-import org.hibernate.query.sqm.tree.SqmNode.log
 import org.junit.jupiter.api.Test
-import org.junit.platform.commons.logging.Logger
 import org.junit.platform.commons.logging.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
@@ -32,6 +28,12 @@ class GalleryUnitTest(
     fun readById(){
         val gal = galleryRepository.findById(1L).orElseThrow()
         println(gal)
+    }
+
+    @Test
+    fun readByUsername(){
+        val galList = galleryRepository.findByAccountUsername("test")
+        println(galList)
     }
 
     @Test
