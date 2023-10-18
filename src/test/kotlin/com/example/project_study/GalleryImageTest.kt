@@ -15,7 +15,7 @@ class GalleryImageTest(
     @Test
     fun create(){
         val image = GalleryImage(
-            gallery = galleryRepository.findById(2L).orElseThrow(),
+            gallery = galleryRepository.findById(1L).orElseThrow(), //이로써 연결이 되어 있다는 것을 증명해냄
             path = "/test/test2.png",
             size = 40
         )

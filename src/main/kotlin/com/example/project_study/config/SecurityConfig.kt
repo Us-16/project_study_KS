@@ -29,7 +29,7 @@ class SecurityConfig(
     fun filterChain(http: HttpSecurity): SecurityFilterChain {
         http.authorizeHttpRequests {
                 it
-                    .requestMatchers("/", "/javascript/**", "/css/**", "/img/**", "/logout").permitAll()
+                    .requestMatchers("/", "/javascript/**", "/css/**", "/img/**", "/logout", "/gall/**").permitAll()
                     .requestMatchers("/account/**", "/login/**").anonymous()
             } //이것이 코틀린스러움인건가?
         http.formLogin {
