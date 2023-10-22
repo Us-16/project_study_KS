@@ -22,5 +22,7 @@ data class Gallery(
     @Column(nullable = false)
     var createdDate:LocalDateTime = LocalDateTime.now(),
     @Column(nullable = true)
-    var modifiedDate:LocalDateTime? = null
+    var modifiedDate:LocalDateTime? = null,
+    @Column(nullable = false)
+    var classify: String //게시판 분류
 )

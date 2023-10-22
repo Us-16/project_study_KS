@@ -19,7 +19,8 @@ class GalleryUnitTest(
         val gall = Gallery(
             account =  accountRepository.findByUsername("test").orElseThrow(),
             title = "Tester",
-            content = "first gall",
+            content = "third gall",
+            classify = "TEST"
         )
         println(galleryRepository.save(gall))
     }
@@ -34,6 +35,13 @@ class GalleryUnitTest(
     fun readByUsername(){
         val galList = galleryRepository.findByAccountUsername("test")
         println(galList)
+    }
+
+    @Test
+    fun readByClassify(){
+        galleryRepository.findByClassify("Test").forEach {
+            println(it)
+        }
     }
 
     @Test
