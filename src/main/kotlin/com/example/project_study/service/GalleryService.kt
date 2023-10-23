@@ -52,10 +52,9 @@ class GalleryService(
 
         val galleryImage = GalleryImage(
             gallery = galleryRepository.findById(galleryId).get(),
-            path = "/image/gallery/$fileName",
+            path = "/img/gallery/$fileName",
             size = image.size
         )
-
         galleryImageRepository.save(galleryImage)
     }
 }

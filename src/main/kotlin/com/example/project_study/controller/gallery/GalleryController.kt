@@ -26,8 +26,10 @@ class GalleryController(
 
     @GetMapping("/detail")
     fun detailPage(@RequestParam(defaultValue = "-1")id:Long, model: Model):String{
-        val gallery = galleryService
-        model.addAttribute("title", )
+        val gallery = galleryService.getGallById(id)
+        model.addAttribute("title", gallery.title)
+        model.addAttribute("gallery", gallery)
+        model.addAttribute("image", galleryService.getAllImageByGallId(id))
         return "content/gallery/detail"
     }
 
