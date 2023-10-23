@@ -2,6 +2,8 @@ package com.example.project_study.service
 
 import com.example.project_study.data.account.AccountRepository
 import com.example.project_study.data.gall.*
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.PageRequest
 import org.springframework.security.core.userdetails.User
 import org.springframework.stereotype.Service
 import org.springframework.web.multipart.MultipartFile
@@ -15,8 +17,9 @@ class GalleryService(
     private val galleryImageRepository: GalleryImageRepository,
     private val answerRepository: AnswerRepository
 ) {
-    fun getAllList(): MutableList<Gallery> {
-        return galleryRepository.findAll()
+    fun getAllList(page:Int, size:Int): Page<Gallery> {
+        val pageRequest = PageRequest.of(page, size)
+        return galleryRepository.findAll(pageRequest)
     }
 
     fun getGallById(id:Long): Gallery {
