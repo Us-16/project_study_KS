@@ -1,11 +1,16 @@
 package com.example.project_study.service
 
+import com.example.project_study.data.account.AccountRepository
 import com.example.project_study.data.gall.*
+import org.springframework.security.core.userdetails.User
 import org.springframework.stereotype.Service
+import org.springframework.web.multipart.MultipartFile
+import java.io.File
 import java.util.*
 
 @Service
 class GalleryService(
+    private val accountRepository: AccountRepository,
     private val galleryRepository: GalleryRepository,
     private val galleryImageRepository: GalleryImageRepository,
     private val answerRepository: AnswerRepository
@@ -24,5 +29,33 @@ class GalleryService(
 
     fun getAllAnswerByGallId(gallId: Long): List<Answer> {
         return answerRepository.findByGalleryId(gallId)
+    }
+
+    fun createGallery(form:GalleryForm, user: User){
+        val gallery = Gallery(
+            account = accountRepository.findByUsername(user.username).get(),
+            title = form.title,
+            content = form.content,
+            classify = "게시판"
+        )
+        val result = galleryRepository.save(gallery)
+        result.id?.let { createGalleryImage(form.image, it) }
+    }
+
+    private fun createGalleryImage(image:MultipartFile, galleryId:Long){
+        val projectPath:String = System.getProperty("user.dir") + "/src/main/resources/static/img/gallery"
+        val uuid = UUID.randomUUID()
+        val fileName = uuid.toString() + "_" + image.originalFilename
+
+        val saveFile = File(projectPath, fileName)
+        image.transferTo(saveFile)
+
+        val galleryImage = GalleryImage(
+            gallery = galleryRepository.findById(galleryId).get(),
+            path = "/image/gallery/$fileName",
+            size = image.size
+        )
+
+        galleryImageRepository.save(galleryImage)
     }
 }

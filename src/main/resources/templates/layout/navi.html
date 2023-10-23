@@ -15,11 +15,13 @@
                 </li>
             </ul>
             <form class="d-flex" role="search">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" id="nav_search">
+                <input class="form-control me-2" type="search" placeholder="이거 아무것도 안됩니다 ㄹㅇ" aria-label="Search" id="nav_search">
                 <button class="btn btn-outline-success" type="submit">Search</button>
             </form>
-            <a type="button" class="login_button btn btn-outline-secondary" sec:authorize="isAnonymous()" th:href="@{/user/login}">로그인</a>
-            <a type="button" class="login_button btn btn-secondary" sec:authorize="isAuthenticated()" th:href="@{/user/logout}">로그아웃</a>
+            <div style="margin: 0px 10px;">
+                <a type="button" class="login_button btn btn-outline-secondary" sec:authorize="isAnonymous()" th:href="@{/user/login}">로그인</a>
+                <a type="button" class="login_button btn btn-secondary" sec:authorize="isAuthenticated()" th:href="@{/user/logout}">로그아웃</a>
+            </div>
         </div>
     </div>
 </nav>

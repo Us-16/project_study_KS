@@ -40,3 +40,6 @@ out/
 /src/main/resources/application.properties
 application.properties
 *.properties
+
+### RESOURCES ###
+/src/main/resources/img/gallery/**.png

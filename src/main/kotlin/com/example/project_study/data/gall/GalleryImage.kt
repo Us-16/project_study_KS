@@ -4,7 +4,7 @@ import jakarta.persistence.*
 
 @Entity
 @Table(name="GALLERY_IMAGE")
-data class GalleryImage (
+data class GalleryImage(
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id:Long? = null,
     @ManyToOne(fetch = FetchType.LAZY)
@@ -13,5 +13,5 @@ data class GalleryImage (
     @Column(nullable = false)
     var path:String,
     @Column(nullable = false)
-    var size:Int
+    var size: Long
 )
