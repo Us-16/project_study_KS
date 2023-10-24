@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.RestController
 import java.util.stream.Stream
 
 @RestController
-@RequestMapping("/gall/api")
+@RequestMapping("/gall/api", produces = ["application/json;charset=utf8"])
 class GalleryRestApi(
     private val galleryService: GalleryService,
-) {
+    ) {
     @GetMapping("/list")
     fun getAllGall(@RequestParam("page", defaultValue = "0")page:Int, @RequestParam("size", defaultValue = "10")size:Int): MutableList<Gallery> {
         return galleryService.getAllList(page, size).content
