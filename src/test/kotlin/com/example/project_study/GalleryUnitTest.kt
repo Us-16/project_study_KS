@@ -38,13 +38,6 @@ class GalleryUnitTest(
     }
 
     @Test
-    fun readByClassify(){
-        galleryRepository.findByClassify("Test").forEach {
-            println(it)
-        }
-    }
-
-    @Test
     fun update(){
         val gal = galleryRepository.findById(1L).orElseThrow()
         gal.title = "Second"

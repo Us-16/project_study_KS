@@ -17,8 +17,8 @@ class GalleryRestApi(
     private val galleryService: GalleryService,
 ) {
     @GetMapping("/list")
-    fun getAllGall(@RequestParam("page", defaultValue = "0")page:Int, @RequestParam("size", defaultValue = "10")size:Int): Page<Gallery> {
-        return galleryService.getAllList(page, size)
+    fun getAllGall(@RequestParam("page", defaultValue = "0")page:Int, @RequestParam("size", defaultValue = "10")size:Int): MutableList<Gallery> {
+        return galleryService.getAllList(page, size).content
     }
 
     @GetMapping("/detail")
