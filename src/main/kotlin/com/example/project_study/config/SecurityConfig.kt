@@ -27,6 +27,7 @@ class SecurityConfig(
     }
     @Bean
     fun filterChain(http: HttpSecurity): SecurityFilterChain {
+        http.csrf { it.disable() } //범인
         http.authorizeHttpRequests {
                 it
                     .requestMatchers("/", "/javascript/**", "/css/**", "/img/**", "/logout", "/gall/**").permitAll()

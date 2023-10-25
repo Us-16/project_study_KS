@@ -32,12 +32,6 @@ dependencies {
 	implementation("org.thymeleaf.extras:thymeleaf-extras-springsecurity6")
 	runtimeOnly("org.mariadb.jdbc:mariadb-java-client")
 
-	implementation("com.squareup.retrofit2:retrofit:2.9.0")
-	implementation("com.squareup.retrofit2:converter-gson:2.9.0")
-	implementation("com.squareup.retrofit2:converter-scalars:2.9.0")
-	implementation("com.squareup.okhttp3:okhttp:3.11.0")
-	implementation("com.squareup.okhttp3:logging-interceptor:3.11.0")
-
 	//providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")
 	testImplementation("org.springframework.boot:spring-boot-starter-test:3.1.0")
 	testImplementation("org.springframework.security:spring-security-test")

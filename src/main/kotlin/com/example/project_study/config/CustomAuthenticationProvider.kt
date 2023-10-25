@@ -15,6 +15,7 @@ class CustomAuthenticationProvider(
     private val customUserDetailsService: CustomUserDetailsService
 ): AuthenticationProvider {
     override fun authenticate(authentication: Authentication?): Authentication {
+        println("provider")
         val username = authentication!!.name
         val password = authentication.credentials.toString()
         val user = customUserDetailsService.loadUserByUsername(username)
