@@ -20,11 +20,8 @@ class CustomLoginSuccessHandler():AuthenticationSuccessHandler {
     ) {
             val userAgent = request?.getHeader("User-Agent")
             /*agent 요약: 모바일 web -> android / 어플 -> okhttp*/
-            //println(userAgent) //신기한게, 아이폰이랑 맥이랑 똑같이 나옴
-
 
             if(userAgent?.contains("okhttp") == true){
-                //TODO("이게 맞다면, 유저정보 일부를 reponse하도록 만들어주세요")
                 response?.contentType="application/json"
                 response?.writer?.write(ObjectMapper().writeValueAsString(authentication?.principal as UserDetails))
             }else{

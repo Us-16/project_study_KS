@@ -34,15 +34,6 @@ class SecurityConfig(
                     .requestMatchers("/account/**", "/login/**").anonymous()
                     .anyRequest().fullyAuthenticated()
             } //이것이 코틀린스러움인건가?
-        /*//JWT config Backup
-        http.exceptionHandling {
-            it.authenticationEntryPoint(jwtAuthenticationEntryPoint)
-            it.accessDeniedHandler(jwtAccessDeniedHandler)
-        }
-        http.sessionManagement{
-            it.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-        }
-        http.apply(JwtSecurityConfig(tokenProvider))*/
         http.formLogin {
                 it
                     .loginPage("/login")
