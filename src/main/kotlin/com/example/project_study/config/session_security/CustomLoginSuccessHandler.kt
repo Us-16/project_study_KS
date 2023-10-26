@@ -22,12 +22,12 @@ class CustomLoginSuccessHandler():AuthenticationSuccessHandler {
                 //TODO("이게 맞다면, 유저정보 일부를 reponse하도록 만들어주세요")
                 response?.contentType="application/json"
                 response?.writer?.write(authentication?.principal.toString())
+            }else{
+                //TODO("이전 페이지로 돌아가도록 만들어주세요")
+                /*급할 거 없이 리팩토링 단계에서 진행하시면 됩니다.*/
+                val redirectStrategy = DefaultRedirectStrategy()
+                redirectStrategy.sendRedirect(request, response, "/")
             }
-
-            //TODO("이전 페이지로 돌아가도록 만들어주세요")
-            /*급할 거 없이 리팩토링 단계에서 진행하시면 됩니다.*/
-            val redirectStrategy = DefaultRedirectStrategy()
-            redirectStrategy.sendRedirect(request, response, "/")
-    }
+        }
 
 }
