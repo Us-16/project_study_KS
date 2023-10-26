@@ -1,7 +1,6 @@
-package com.example.project_study.config
+package com.example.project_study.config.session_security
 
 import com.example.project_study.data.account.AccountRepository
-import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.userdetails.User
 import org.springframework.security.core.userdetails.UserDetails

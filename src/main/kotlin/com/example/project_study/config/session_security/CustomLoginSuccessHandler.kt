@@ -1,4 +1,4 @@
-package com.example.project_study.config
+package com.example.project_study.config.session_security
 
 import jakarta.servlet.http.HttpServletRequest
 import jakarta.servlet.http.HttpServletResponse
@@ -13,7 +13,8 @@ class CustomLoginSuccessHandler():AuthenticationSuccessHandler {
         response: HttpServletResponse?,
         authentication: Authentication?
     ) {
-
+            val userAgent = request?.getHeader("User-Agent")
+            println(userAgent) //신기한게, 아이폰이랑 맥이랑 똑같이 나옴
     }
 
 }

@@ -1,29 +1,21 @@
-package com.example.project_study.config
+package com.example.project_study.config.session_security
 
-import com.example.project_study.config.jwt.JwtAccessDeniedHandler
-import com.example.project_study.config.jwt.JwtSecurityConfig
-import com.example.project_study.config.jwt.TokenProvider
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
-import org.springframework.security.config.http.SessionCreationPolicy
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.crypto.password.PasswordEncoder
-import org.springframework.security.web.AuthenticationEntryPoint
 import org.springframework.security.web.SecurityFilterChain
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher
 
 @Configuration
 @EnableWebSecurity
 class SecurityConfig(
-    private val customLoginSuccessHandler:CustomLoginSuccessHandler,
-    private val customLoginFailureHandler:CustomLoginFailureHandler,
-    private val jwtAuthenticationEntryPoint: AuthenticationEntryPoint,
-    private val jwtAccessDeniedHandler: JwtAccessDeniedHandler,
-    private val tokenProvider: TokenProvider
+    private val customLoginSuccessHandler: CustomLoginSuccessHandler,
+    private val customLoginFailureHandler: CustomLoginFailureHandler,
 ) {
     @Bean
     fun passwordEncoder():PasswordEncoder{
@@ -42,7 +34,7 @@ class SecurityConfig(
                     .requestMatchers("/account/**", "/login/**").anonymous()
                     .anyRequest().fullyAuthenticated()
             } //이것이 코틀린스러움인건가?
-        //JWT config Backup
+        /*//JWT config Backup
         http.exceptionHandling {
             it.authenticationEntryPoint(jwtAuthenticationEntryPoint)
             it.accessDeniedHandler(jwtAccessDeniedHandler)
@@ -50,10 +42,7 @@ class SecurityConfig(
         http.sessionManagement{
             it.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
         }
-        http.apply(JwtSecurityConfig(tokenProvider))
-
-
-
+        http.apply(JwtSecurityConfig(tokenProvider))*/
         http.formLogin {
                 it
                     .loginPage("/login")
