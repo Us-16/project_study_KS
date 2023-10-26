@@ -16,6 +16,14 @@ class CustomLoginSuccessHandler():AuthenticationSuccessHandler {
             val userAgent = request?.getHeader("User-Agent")
             /*agent 요약: 모바일 web -> android / 어플 -> okhttp*/
             println(userAgent) //신기한게, 아이폰이랑 맥이랑 똑같이 나옴
+
+            if(userAgent?.contains("Android") == true){
+                println("Access By Android")
+            }else if (userAgent?.contains("okhttp") == true){
+                println("Access By Application with OkHttp3")
+            }else{
+                println("Access by Other")
+            }
     }
 
 }
