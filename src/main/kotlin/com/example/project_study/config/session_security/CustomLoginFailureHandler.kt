@@ -25,6 +25,7 @@ class CustomLoginFailureHandler(
         if(userAgent?.contains("okhttp") == true){
             //TODO("모바일에서 접속 실패 관련 로직 필요")
             response?.contentType="application/json"
+            response?.characterEncoding = "utf8"
             response?.writer?.write(ObjectMapper().writeValueAsString(failureMsg(exception)))
         }else{
             val redirectStrategy = DefaultRedirectStrategy()

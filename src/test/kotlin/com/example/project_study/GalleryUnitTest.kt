@@ -26,6 +26,20 @@ class GalleryUnitTest(
     }
 
     @Test
+    fun createManyThings(){
+        for(idx in 0 .. 1000){
+            val gall = Gallery(
+                account =  accountRepository.findByUsername("test").orElseThrow(),
+                title = "Tester",
+                content = "$idx gall",
+                classify = "TEST"
+            )
+            println("$idx gallery made")
+            galleryRepository.save(gall)
+        }
+    }
+
+    @Test
     fun readById(){
         val gal = galleryRepository.findById(1L).orElseThrow()
         println(gal)
