@@ -1,18 +1,13 @@
 package com.example.project_study.controller.gallery
 
-import com.example.project_study.data.gall.Answer
-import com.example.project_study.data.gall.Gallery
-import com.example.project_study.data.gall.GalleryImage
-import com.example.project_study.data.gall.ResponseGalleryAndroid
+import com.example.project_study.data.gall.*
 import com.example.project_study.service.GalleryService
-import org.springframework.data.domain.Page
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
-import java.util.stream.Stream
 
 @RestController
 @RequestMapping("/gall/api", produces = ["application/json;charset=utf8"])
@@ -49,6 +44,10 @@ class GalleryRestApi(
 
     @PostMapping("/create")
     fun create(@RequestBody data:ResponseGalleryAndroid){
-        println(data)
+        val galleryForm = GalleryForm(
+            title = data.title,
+            content =  data.content
+        )
+        return galleryService.createGallery(galleryForm, data.username)
     }
 }

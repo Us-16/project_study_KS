@@ -34,15 +34,18 @@ class GalleryService(
         return answerRepository.findByGalleryId(gallId)
     }
 
-    fun createGallery(form:GalleryForm, user: User){
+    fun createGallery(form:GalleryForm, username: String){
         val gallery = Gallery(
-            account = accountRepository.findByUsername(user.username).get(),
+            account = accountRepository.findByUsername(username).get(),
             title = form.title,
             content = form.content,
             classify = "게시판"
         )
         val result = galleryRepository.save(gallery)
-        result.id?.let { createGalleryImage(form.image, it) }
+
+        if(form.image != null) {
+            result.id?.let { createGalleryImage(form.image, it) }
+        }
     }
 
     private fun createGalleryImage(image:MultipartFile, galleryId:Long){

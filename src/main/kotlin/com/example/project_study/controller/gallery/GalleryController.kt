@@ -41,7 +41,7 @@ class GalleryController(
     @PostMapping("/create")
     fun createForm(form:GalleryForm, @AuthenticationPrincipal user:User):String{
         println(form)//데이터 전송 확인
-        galleryService.createGallery(form, user)
+        galleryService.createGallery(form, user.username)
         return "redirect:/gall/list"
     }
 }
