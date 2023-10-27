@@ -3,6 +3,7 @@ package com.example.project_study.controller.gallery
 import com.example.project_study.data.gall.Answer
 import com.example.project_study.data.gall.Gallery
 import com.example.project_study.data.gall.GalleryImage
+import com.example.project_study.data.gall.ResponseGalleryAndroid
 import com.example.project_study.service.GalleryService
 import org.springframework.data.domain.Page
 import org.springframework.web.bind.annotation.GetMapping
@@ -46,5 +47,8 @@ class GalleryRestApi(
         return result
     }
 
-
+    @PostMapping("/create")
+    fun create(@RequestBody data:ResponseGalleryAndroid){
+        println(data)
+    }
 }
