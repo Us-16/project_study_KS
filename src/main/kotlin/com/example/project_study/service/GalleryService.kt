@@ -19,7 +19,7 @@ class GalleryService(
 ) {
     fun getAllList(page:Int, size:Int): Page<Gallery> {
         val pageRequest = PageRequest.of(page, size)
-        return galleryRepository.findAll(pageRequest)
+        return galleryRepository.findAllByOrderByIdDesc(pageRequest)
     }
 
     fun getGallById(id:Long): Gallery {

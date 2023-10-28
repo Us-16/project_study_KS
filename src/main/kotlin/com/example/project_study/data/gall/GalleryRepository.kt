@@ -7,5 +7,5 @@ import org.springframework.data.jpa.repository.JpaRepository
 interface GalleryRepository:JpaRepository<Gallery, Long> {
     fun findByAccountUsername(username:String): List<Gallery>
     fun findByClassify(classify: String): List<Gallery>
-    override fun findAll(pageable: Pageable):Page<Gallery>
+    fun findAllByOrderByIdDesc(pageable: Pageable):Page<Gallery>
 }
