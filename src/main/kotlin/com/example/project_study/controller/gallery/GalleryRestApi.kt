@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.multipart.MultipartFile
 
 @RestController
 @RequestMapping("/gall/api", produces = ["application/json;charset=utf8"])
@@ -43,11 +44,18 @@ class GalleryRestApi(
     }
 
     @PostMapping("/create")
-    fun create(@RequestBody data:ResponseGalleryAndroid){
+    fun create(@RequestBody data:ResponseGalleryAndroid):Boolean{
         val galleryForm = GalleryForm(
             title = data.title,
             content =  data.content
         )
-        return galleryService.createGallery(galleryForm, data.username)
+        val result = galleryService.createGallery(galleryForm, data.username)
+        return true
+    }
+
+    @PostMapping("/create-image")
+    fun createImage(@RequestBody image: MultipartFile){
+        println(image.originalFilename)
+        return galleryService.createGalleryImage(image, 1009L)
     }
 }

@@ -23,7 +23,9 @@ class GalleryService(
     }
 
     fun getGallById(id:Long): Gallery {
-        return galleryRepository.findById(id).orElseThrow()
+        val gall = galleryRepository.findById(id).orElseThrow()
+        gall.account.password = "***"
+        return gall
     }
 
     fun getAllImageByGallId(gallId: Long): List<GalleryImage> {
@@ -48,7 +50,7 @@ class GalleryService(
         }
     }
 
-    private fun createGalleryImage(image:MultipartFile, galleryId:Long){
+    fun createGalleryImage(image:MultipartFile, galleryId:Long){
         val projectPath:String = System.getProperty("user.dir") + "/src/main/resources/static/img/gallery"
         val uuid = UUID.randomUUID()
         val fileName = uuid.toString() + "_" + image.originalFilename

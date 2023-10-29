@@ -41,7 +41,7 @@ class GalleryUnitTest(
 
     @Test
     fun readById(){
-        val gal = galleryRepository.findById(1L).orElseThrow()
+        val gal = galleryRepository.findById(1009L).orElseThrow()
         println(gal)
     }
 
