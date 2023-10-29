@@ -1,5 +1,6 @@
 package com.example.project_study.data.gall
 
+import com.example.project_study.data.account.Account
 import com.fasterxml.jackson.annotation.JsonBackReference
 import com.fasterxml.jackson.annotation.JsonIgnore
 import jakarta.persistence.*
@@ -18,7 +19,12 @@ data class Answer(
     val createdDate: LocalDateTime? = LocalDateTime.now(),
     @Column(nullable = true)
     var modifiedDate: LocalDateTime? = null,
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="gallery_id", nullable = false)
-    var gallery: Gallery
+    var gallery: Gallery,
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="account_id", nullable = false)
+    var account:Account
 )
