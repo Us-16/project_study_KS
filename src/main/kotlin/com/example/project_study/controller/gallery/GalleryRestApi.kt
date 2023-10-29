@@ -13,7 +13,7 @@ import org.springframework.web.multipart.MultipartFile
 @RestController
 @RequestMapping("/gall/api", produces = ["application/json;charset=utf8"])
 class GalleryRestApi(
-    private val galleryService: GalleryService,
+    private val galleryService: GalleryService
     ) {
     @GetMapping("/list")
     fun getAllGall(@RequestParam("page", defaultValue = "0")page:Int, @RequestParam("size", defaultValue = "30")size:Int): MutableList<Gallery> {
@@ -28,11 +28,6 @@ class GalleryRestApi(
     @GetMapping("/image-list")
     fun getAllGall(@RequestParam(defaultValue = "-1") id:Long): List<GalleryImage> {
         return galleryService.getAllImageByGallId(id)
-    }
-
-    @GetMapping("/answer-list")
-    fun getAllAnswer(@RequestParam(defaultValue = "-1") id:Long): List<Answer> {
-        return galleryService.getAllAnswerByGallId(id)
     }
 
     @PostMapping("/test")
@@ -57,5 +52,15 @@ class GalleryRestApi(
     fun createImage(@RequestBody image: MultipartFile){
         println(image.originalFilename)
         return galleryService.createGalleryImage(image, 1009L)
+    }
+
+    @GetMapping("/answer-list")
+    fun getAllAnswer(@RequestParam(defaultValue = "-1") gallId:Long): List<Answer> {
+        return galleryService.getAllAnswerByGallId(gallId)
+    }
+
+    @PostMapping("/create/answer")
+    fun createAnswer(@RequestBody answer:Answer):Long{
+        return galleryService.createAnswer(answer).id?: -1
     }
 }

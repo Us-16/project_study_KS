@@ -65,4 +65,8 @@ class GalleryService(
         )
         galleryImageRepository.save(galleryImage)
     }
+
+    fun createAnswer(answer: Answer): Answer {
+        return answerRepository.save(answer)
+    }
 }
