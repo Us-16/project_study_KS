@@ -4,11 +4,12 @@ import com.example.project_study.data.account.AccountRepository
 import com.example.project_study.data.gall.*
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.PageRequest
-import org.springframework.security.core.userdetails.User
 import org.springframework.stereotype.Service
 import org.springframework.web.multipart.MultipartFile
 import java.io.File
+import java.time.LocalDateTime
 import java.util.*
+import kotlin.collections.HashMap
 
 @Service
 class GalleryService(
@@ -36,7 +37,7 @@ class GalleryService(
         return answerRepository.findByGalleryId(gallId)
     }
 
-    fun createGallery(form:GalleryForm, username: String){
+    fun createGallery(form:GalleryForm, username: String): Gallery {
         val gallery = Gallery(
             account = accountRepository.findByUsername(username).get(),
             title = form.title,
@@ -48,6 +49,8 @@ class GalleryService(
         if(form.image != null) {
             result.id?.let { createGalleryImage(form.image, it) }
         }
+
+        return result
     }
 
     fun createGalleryImage(image:MultipartFile, galleryId:Long){
@@ -67,6 +70,15 @@ class GalleryService(
     }
 
     fun createAnswer(answer: Answer): Answer {
+        return answerRepository.save(answer)
+    }
+    fun createAnswer(data:HashMap<String, String>): Answer {
+        val answer = Answer(
+            content = data["content"]!!,
+            createdDate = LocalDateTime.now(),
+            gallery =  galleryRepository.findById(data["gallId"]!!.toLong()).get(),
+            account = accountRepository.findByUsername(data["username"]!!).get()
+        )
         return answerRepository.save(answer)
     }
 }

@@ -2,12 +2,8 @@ package com.example.project_study.controller.gallery
 
 import com.example.project_study.data.gall.*
 import com.example.project_study.service.GalleryService
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RequestParam
-import org.springframework.web.bind.annotation.RestController
+import org.slf4j.LoggerFactory
+import org.springframework.web.bind.annotation.*
 import org.springframework.web.multipart.MultipartFile
 
 @RestController
@@ -15,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile
 class GalleryRestApi(
     private val galleryService: GalleryService
     ) {
+    private val log = LoggerFactory.getLogger(this.javaClass)!!
     @GetMapping("/list")
     fun getAllGall(@RequestParam("page", defaultValue = "0")page:Int, @RequestParam("size", defaultValue = "30")size:Int): MutableList<Gallery> {
         return galleryService.getAllList(page, size).content
@@ -39,13 +36,12 @@ class GalleryRestApi(
     }
 
     @PostMapping("/create")
-    fun create(@RequestBody data:ResponseGalleryAndroid):Boolean{
+    fun create(@RequestBody data: ResponseGalleryAndroid): Gallery {
         val galleryForm = GalleryForm(
             title = data.title,
-            content =  data.content
+            content = data.content
         )
-        val result = galleryService.createGallery(galleryForm, data.username)
-        return true
+        return galleryService.createGallery(galleryForm, data.username)
     }
 
     @PostMapping("/create-image")
@@ -60,7 +56,7 @@ class GalleryRestApi(
     }
 
     @PostMapping("/create/answer")
-    fun createAnswer(@RequestBody answer:Answer):Long{
-        return galleryService.createAnswer(answer).id?: -1
+    fun createAnswer(@RequestBody data:HashMap<String, String>):Long{
+        return galleryService.createAnswer(data).id?: -1
     }
 }
