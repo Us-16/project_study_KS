@@ -31,7 +31,7 @@ class SecurityConfig(
         http.authorizeHttpRequests {
                 it
                     .requestMatchers("/", "/javascript/**", "/css/**", "/img/**", "/logout", "/gall/**").permitAll()
-                    .requestMatchers("/account/**", "/login/**").anonymous()
+                    .requestMatchers("/account/**", "/login/**", "/sms/**").anonymous()
                     .anyRequest().fullyAuthenticated()
             } //이것이 코틀린스러움인건가?
         http.formLogin {

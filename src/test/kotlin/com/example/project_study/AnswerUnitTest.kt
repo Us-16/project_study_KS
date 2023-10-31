@@ -20,7 +20,8 @@ class AnswerUnitTest(
     fun create(){
         val answer = Answer(
             content = "Test Answer",
-            gallery = galleryRepository.findById(1L).orElseThrow()
+            gallery = galleryRepository.findById(1L).orElseThrow(),
+            account = accountRepository.findById(1L).orElseThrow()
         )
         println(answerRepository.save(answer))
     }
