@@ -1,7 +1,6 @@
-package com.example.project_study.config.session_security
+package com.example.project_study.config.security
 
 import com.fasterxml.jackson.databind.ObjectMapper
-import com.fasterxml.jackson.module.kotlin.jsonMapper
 import jakarta.servlet.http.HttpServletRequest
 import jakarta.servlet.http.HttpServletResponse
 import org.springframework.security.core.Authentication
@@ -9,7 +8,6 @@ import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.web.DefaultRedirectStrategy
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler
 import org.springframework.stereotype.Component
-import java.security.Principal
 
 @Component
 class CustomLoginSuccessHandler():AuthenticationSuccessHandler {

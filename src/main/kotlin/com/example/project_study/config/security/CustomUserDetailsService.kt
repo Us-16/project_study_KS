@@ -1,4 +1,4 @@
-package com.example.project_study.config.session_security
+package com.example.project_study.config.security
 
 import com.example.project_study.data.account.AccountRepository
 import org.springframework.security.core.authority.SimpleGrantedAuthority

@@ -1,4 +1,4 @@
-package com.example.project_study.config.session_security
+package com.example.project_study.config.security
 
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
