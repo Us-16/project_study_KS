@@ -10,4 +10,8 @@ class AccountService(
     fun checkDupTel(tel:String):Boolean{
         return accountRepository.findByTel(tel).isEmpty //비어있다면 true
     }
+
+    fun checkDupUsername(username:String):Boolean{
+        return accountRepository.findByUsername(username).isEmpty
+    }
 }

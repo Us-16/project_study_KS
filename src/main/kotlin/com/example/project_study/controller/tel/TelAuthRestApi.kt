@@ -28,7 +28,7 @@ class TelAuthRestApi(
             content = telService.createCode()
         )
         logger.info("${dto.content}")
-        //logger.info("After Send: ${telService.sendSmsCoolSMS(dto)}")
+        logger.info("After Send: ${telService.sendSmsCoolSMS(dto)}")
         return dto.content
     }
 }
