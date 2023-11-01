@@ -14,7 +14,7 @@ function replaceHyphen(target){
     3. 중복확인 후 성공 시, 인증번호 전달
 */
 function getCode(){
-    axios.get('/sms/code')
+    axios.get(`/sms/code?tel=${tel}`)
         .then(response => {
             answerCode = String(response.data)
             console.log(answerCode)
@@ -25,7 +25,7 @@ function getCode(){
 }
 
 function dupTelCheck(){
-    tel = tel.value.replace().replace(/-/g, '')
+    tel = tel.value.replace(/-/g, '')
 
     axios.get(`/sms/tel-dup?tel=${tel}`)
         .then(response => {
@@ -46,5 +46,13 @@ function dupTelCheck(){
     - 코드 번호는 answerCode에 저장
 */
 function checkCode(){
-
+    var userInput = document.querySelector('#account_telAuth').value
+    function success(){
+        alert('성공')
+        window.location.href="/login"
+    }
+    function failure(){
+        alert('실패')
+    }
+    (userInput === answerCode) ? success() : failure()
 }

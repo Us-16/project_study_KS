@@ -36,10 +36,12 @@ dependencies {
 	implementation("io.jsonwebtoken:jjwt-impl:0.11.5")
 	implementation("io.jsonwebtoken:jjwt-jackson:0.11.5")
 
+	implementation("org.apache.httpcomponents.client5:httpclient5:5.2.1")
+	implementation("net.nurigo:javaSDK:2.2") //SMS Service
 
 	//providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")
 	testImplementation("org.springframework.boot:spring-boot-starter-test:3.1.0")
-	testImplementation("org.springframework.security:spring-security-test")
+	testImplementation("org.springframework.security:spring-security-test:6.0.2")
 }
 
 tasks.withType<KotlinCompile> {
