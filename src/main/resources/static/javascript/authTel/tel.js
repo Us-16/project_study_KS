@@ -7,12 +7,6 @@ function replaceHyphen(target){
                     .replace(/(\-{1,2})$/g, "");
 }
 
-/**
-    코드번호 전달
-    1. 입력한 전화번호 받음
-    2. 중복 확인
-    3. 중복확인 후 성공 시, 인증번호 전달
-*/
 function getCode(){
     axios.get(`/sms/code?tel=${tel}`)
         .then(response => {
@@ -41,10 +35,6 @@ function dupTelCheck(){
     return false
 }
 
-/**
-    코드 번호 확인
-    - 코드 번호는 answerCode에 저장
-*/
 function checkCode(){
     var userInput = document.querySelector('#account_telAuth').value
     function success(){

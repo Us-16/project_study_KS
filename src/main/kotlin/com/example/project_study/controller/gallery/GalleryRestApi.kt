@@ -3,6 +3,7 @@ package com.example.project_study.controller.gallery
 import com.example.project_study.data.gall.*
 import com.example.project_study.service.GalleryService
 import org.slf4j.LoggerFactory
+import org.springframework.data.domain.Page
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.multipart.MultipartFile
 
@@ -13,8 +14,8 @@ class GalleryRestApi(
     ) {
     private val log = LoggerFactory.getLogger(this.javaClass)!!
     @GetMapping("/list")
-    fun getAllGall(@RequestParam("page", defaultValue = "0")page:Int, @RequestParam("size", defaultValue = "30")size:Int): MutableList<Gallery> {
-        return galleryService.getAllList(page, size).content
+    fun getAllGall(@RequestParam("page", defaultValue = "0")page:Int, @RequestParam("size", defaultValue = "30")size:Int): Page<Gallery> {
+        return galleryService.getAllList(page, size)
     }
 
     @GetMapping("/detail")
