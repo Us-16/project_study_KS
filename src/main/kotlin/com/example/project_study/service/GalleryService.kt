@@ -99,4 +99,8 @@ class GalleryService(
     fun deleteGallery(gallId: Long) {
         return galleryRepository.deleteById(gallId)
     }
+
+    fun deleteAllImageById(gallId: Long): Void {
+        return galleryImageRepository.deleteGalleryImagesByGalleryId(gallId)
+    }
 }

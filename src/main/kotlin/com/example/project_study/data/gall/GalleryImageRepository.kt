@@ -4,4 +4,5 @@ import org.springframework.data.jpa.repository.JpaRepository
 
 interface GalleryImageRepository:JpaRepository<GalleryImage, Long> {
     fun findByGalleryId(id:Long): List<GalleryImage>
+    fun deleteGalleryImagesByGalleryId(id:Long):Void
 }

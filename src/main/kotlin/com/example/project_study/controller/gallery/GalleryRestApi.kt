@@ -64,6 +64,9 @@ class GalleryRestApi(
 
     @DeleteMapping("/delete")
     fun deleteGallery(@RequestParam gallId: Long){
+        if(galleryService.getAllImageByGallId(gallId).isNotEmpty()){
+            galleryService.deleteAllImageById(gallId)
+        }
         return galleryService.deleteGallery(gallId)
     }
 }
