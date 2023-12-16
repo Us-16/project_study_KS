@@ -79,7 +79,12 @@ class GalleryRestApi(
     }
 
     @PutMapping("/update")
-    fun updateGallery(@RequestBody data:ResponseGalleryAndroid) {
+    fun updateGallery(@RequestBody data:ResponseGalleryAndroid): Gallery {
         println(data)
+        //넘어온거 확인
+        return galleryService.updateGallery(
+            data.id!!,
+            GalleryForm(data.title, data.content),
+            data.username)
     }
 }
