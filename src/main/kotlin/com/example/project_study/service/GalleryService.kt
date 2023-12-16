@@ -63,7 +63,7 @@ class GalleryService(
         return galleryRepository.save(oriGall)
     }
 
-    fun createGalleryImage(image:MultipartFile, galleryId:Long){
+    fun createGalleryImage(image:MultipartFile, galleryId:Long): GalleryImage {
         val projectPath:String = System.getProperty("user.dir") + "/src/main/resources/static/img/gallery"
         val uuid = UUID.randomUUID()
         val fileName = uuid.toString() + "_" + image.originalFilename
@@ -76,7 +76,7 @@ class GalleryService(
             path = "/img/gallery/$fileName",
             size = image.size
         )
-        galleryImageRepository.save(galleryImage)
+        return galleryImageRepository.save(galleryImage)
     }
 
     fun createAnswer(answer: Answer): Answer {
@@ -97,10 +97,15 @@ class GalleryService(
     }
 
     fun deleteGallery(gallId: Long) {
+        println("gallId: $gallId")
         return galleryRepository.deleteById(gallId)
     }
 
-    fun deleteAllImageById(gallId: Long): Void {
-        return galleryImageRepository.deleteGalleryImagesByGalleryId(gallId)
+    fun deleteAllImageById(image:GalleryImage) {
+        return galleryImageRepository.delete(image)
+    }
+
+    fun deleteAllAnswer(answer:Answer){
+        return answerRepository.delete(answer)
     }
 }

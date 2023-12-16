@@ -46,10 +46,11 @@ class GalleryRestApi(
     }
 
 
-    @PostMapping("/create-image")
-    fun createImage(@RequestBody image: MultipartFile){
+    @PostMapping("/create-image/{gallId}")
+    fun createImage(@RequestPart("profile") image: MultipartFile, @PathVariable("gallId") gallId: Long): Long? {
+        println(gallId)
         println(image.originalFilename)
-        return galleryService.createGalleryImage(image, 1009L)
+        return galleryService.createGalleryImage(image, gallId).id //return void
     }
 
     @GetMapping("/answer-list")
@@ -64,8 +65,15 @@ class GalleryRestApi(
 
     @DeleteMapping("/delete")
     fun deleteGallery(@RequestParam gallId: Long){
-        if(galleryService.getAllImageByGallId(gallId).isNotEmpty()){
-            galleryService.deleteAllImageById(gallId)
+        val imageList = galleryService.getAllImageByGallId(gallId)
+        val answerList = galleryService.getAllAnswerByGallId(gallId)
+        if(imageList.isNotEmpty()){
+            for(item in imageList)
+                galleryService.deleteAllImageById(item)
+        }
+        if(answerList.isNotEmpty()){
+            for(item in answerList)
+                galleryService.deleteAllAnswer(item)
         }
         return galleryService.deleteGallery(gallId)
     }
