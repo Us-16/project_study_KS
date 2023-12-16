@@ -77,4 +77,9 @@ class GalleryRestApi(
         }
         return galleryService.deleteGallery(gallId)
     }
+
+    @PutMapping("/update")
+    fun updateGallery(@RequestBody data:ResponseGalleryAndroid) {
+        println(data)
+    }
 }
