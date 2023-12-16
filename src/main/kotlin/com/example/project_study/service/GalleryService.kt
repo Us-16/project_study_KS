@@ -10,6 +10,7 @@ import java.io.File
 import java.time.LocalDateTime
 import java.util.*
 import kotlin.collections.HashMap
+import kotlin.jvm.optionals.getOrNull
 
 @Service
 class GalleryService(
@@ -46,11 +47,20 @@ class GalleryService(
         )
         val result = galleryRepository.save(gallery)
 
-        if(form.image != null) {
-            result.id?.let { createGalleryImage(form.image, it) }
+        if(form.image?.isEmpty == false) {
+            createGalleryImage(form.image,result.id!!)
         }
 
         return result
+    }
+
+    fun updateGallery(id: Long, form:GalleryForm, username:String):Gallery{
+        val oriGall = galleryRepository.findById(id).getOrNull()
+        oriGall!!.title = form.title
+        oriGall.content = form.content
+        oriGall.modifiedDate = LocalDateTime.now()
+
+        return galleryRepository.save(oriGall)
     }
 
     fun createGalleryImage(image:MultipartFile, galleryId:Long){
@@ -80,5 +90,13 @@ class GalleryService(
             account = accountRepository.findByUsername(data["username"]!!).get()
         )
         return answerRepository.save(answer)
+    }
+
+    fun removeGallery(id: Long) {
+        return galleryRepository.delete(galleryRepository.findById(id).orElseThrow())
+    }
+
+    fun deleteGallery(gallId: Long) {
+        return galleryRepository.deleteById(gallId)
     }
 }

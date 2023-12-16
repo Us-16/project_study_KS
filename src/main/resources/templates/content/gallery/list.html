@@ -10,6 +10,18 @@
 <th:block th:replace="~{layout/navi :: naviFragment}"></th:block>
     <section>
         <h1>list</h1>
+        <select name="size" id="size">
+            <option value="10">10개씩 보기</option>
+            <option value="20">20개씩 보기</option>
+            <option value="30">30개씩 보기</option>
+            <option value="40">40개씩 보기</option>
+        </select>
+        <table>
+            <tr th:each="gall, idx: ${gall_list}">
+                <td th:text="${gall.id}"></td>
+                <td><a th:text="${gall.title}" th:href="@{/gall/detail(id=${gall.id})}"></a></td>
+            </tr>
+        </table>
         <a th:href="@{/gall/form}" type="button" class="btn btn-primary">글쓰기</a>
     </section>
 <th:block th:replace="~{layout/footer :: footerFragment}"></th:block>

@@ -10,12 +10,23 @@
 <th:block th:replace="~{layout/navi :: naviFragment}"></th:block>
 
 <section>
-    <form th:action="@{/gall/create}" method="post" enctype="multipart/form-data">
-        <input name="title" type="text" placeholder="Title" id="gall_title" required>
-        <textarea name="content" id="gall_content" cols="30" rows="10" required></textarea>
-        <input name="image" type="file" multiple="multiple" id="gall_file">
-        <input type="submit" value="제출">
-    </form>
+    <div th:if="${id != -1}"> <!--수정이라면-->
+        <form th:action="@{/gall/update}" method="post" enctype="multipart/form-data">
+            <input type="hidden" name="id" th:value="${gall_data.id}">
+            <input name="title" type="text" placeholder="Title" class="gall_title" th:value="${gall_data.title}" required>
+            <textarea name="content" class="gall_content" cols="30" rows="10" th:text="${gall_data.content}" required></textarea>
+            <input name="image" type="file" multiple="multiple" class="gall_file">
+            <input type="submit" value="수정">
+        </form>
+    </div>
+    <div th:unless="${id != -1}">
+        <form th:action="@{/gall/create}" method="post" enctype="multipart/form-data">
+            <input name="title" type="text" placeholder="Title" class="gall_title" required>
+            <textarea name="content" class="gall_content" cols="30" rows="10" required></textarea>
+            <input name="image" type="file" multiple="multiple" class="gall_file">
+            <input type="submit" value="제출">
+        </form>
+    </div>
 </section>
 
 <th:block th:replace="~{layout/footer :: footerFragment}"></th:block>

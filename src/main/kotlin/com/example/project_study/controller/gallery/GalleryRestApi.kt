@@ -45,6 +45,7 @@ class GalleryRestApi(
         return galleryService.createGallery(galleryForm, data.username)
     }
 
+
     @PostMapping("/create-image")
     fun createImage(@RequestBody image: MultipartFile){
         println(image.originalFilename)
@@ -59,5 +60,10 @@ class GalleryRestApi(
     @PostMapping("/create/answer")
     fun createAnswer(@RequestBody data:HashMap<String, String>):Long{
         return galleryService.createAnswer(data).id?: -1
+    }
+
+    @DeleteMapping("/delete")
+    fun deleteGallery(@RequestParam gallId: Long){
+        return galleryService.deleteGallery(gallId)
     }
 }

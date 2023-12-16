@@ -12,7 +12,13 @@
 <section>
      <h1 th:text="${gallery.title}"></h1>
     <p th:text="${gallery.content}"></p>
-    <img th:src="${image[0].path}" alt="test">
+    <div th:if="${#lists.size(image) > 0}">
+        <img th:src="${image[0].path}" alt="test">
+    </div>
+    <div th:if="${isMyGall} == true">
+        <a th:href="@{/gall/form(id=${gallery.id})}" class="btn btn-primary">수정</a>
+        <a th:href="@{/gall/remove(id=${gallery.id})}" class="btn btn-danger">삭제</a>
+    </div>
 </section>
 
 <th:block th:replace="~{layout/footer :: footerFragment}"></th:block>
